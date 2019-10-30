@@ -20,6 +20,7 @@
     "test": "./node_modules/jshint/bin/jshint index.js && ./node_modules/jscs/bin/jscs index.js && ./node_modules/mocha/bin/mocha"
   },
   "dependencies": {
+    "eslint-config-node": "^4.0.0",
     "extend": "^3.0.2",
     "lodash": "^4.17.15",
     "request": "^2.88.0",

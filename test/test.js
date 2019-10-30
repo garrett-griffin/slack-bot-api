@@ -1,3 +1,4 @@
+/* eslint-disable */
 var chai = require('chai');
 var Bot = require('../index.js');
 var sinon = require('sinon');
