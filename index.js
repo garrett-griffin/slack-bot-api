@@ -67,7 +67,7 @@ class Bot extends EventEmitter {
   connect() {
     this.ws = new WebSocket(this.wsUrl);
 
-    setWsHeartbeat(this.ws, '{ "kind": "ping" }');
+    setWsHeartbeat(this.ws, '{ "type": "ping" }');
 
     this.ws.on('open', data => {
       this.emit('open', data);
