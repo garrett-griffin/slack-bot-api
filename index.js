@@ -262,12 +262,9 @@ class Bot extends EventEmitter {
    * @returns {vow.Promise}
    */
   getChatIdFromUserId(userID) {
-    console.log('Entering getChatIdFromUserId: ' + userID);
     return this.getUserById(userID)
       .then(data => {
-        console.log(data);
         var chatId = _.find(this.ims, { user: data.id });
-        console.log(chatId);
 
         return (chatId && chatId.id) || this.openIm(data.id);
       })
