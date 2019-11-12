@@ -36,7 +36,12 @@ class Bot extends EventEmitter {
    * Starts a Real Time Messaging API session
    */
   login() {
-    this._api('rtm.start')
+    // Enable Presence Subscriptions
+    var params = {
+      batch_presence_aware: 1,
+      process_sub: 1
+    };
+    this._api('rtm.start', params)
       .then(data => {
         this.wsUrl = data.url;
         this.self = data.self;
@@ -62,7 +67,7 @@ class Bot extends EventEmitter {
   connect() {
     this.ws = new WebSocket(this.wsUrl);
 
-    setWsHeartbeat(this.ws, '{ "kind": "ping" }');
+    setWsHeartbeat(this.ws, '{ "type": "ping" }');
 
     this.ws.on('open', data => {
       this.emit('open', data);
