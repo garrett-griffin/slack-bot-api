@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /* eslint-disable consistent-return */
 /* eslint-disable import/no-nodejs-modules */
 /* eslint-disable import/no-commonjs */
@@ -242,6 +243,21 @@ class Bot extends EventEmitter {
    */
   getChatId(name) {
     return this.getUser(name)
+      .then(data => {
+        var chatId = _.find(this.ims, { user: data.id });
+
+        return (chatId && chatId.id) || this.openIm(data.id);
+      })
+      .then(data => (typeof data === 'string' ? data : data.channel.id));
+  }
+
+  /**
+   * Get "direct message" channel ID
+   * @param {string} name
+   * @returns {vow.Promise}
+   */
+  getChatIdFromUserId(userID) {
+    return this.getUserById(userID)
       .then(data => {
         var chatId = _.find(this.ims, { user: data.id });
 
